@@ -12,7 +12,7 @@ def getToken(url, csrfname, request):
 	try:
 		token = soup.find('input', {"name":csrfname}).get("value")
 	except AttributeError:
-		print("Wrong csrf token name")
+		print("[-] Wrong csrf token name")
 		sys.exit(1)
 
 	return token
