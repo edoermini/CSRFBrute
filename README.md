@@ -10,3 +10,6 @@ python3 CSRFBrute.py -l admin -P /path/to/wordlist.txt -u http://loginpage.com/i
 ```
 <input name="csrf_token" value="5cc55535e3577b3564a28cb093b64f92" type="hidden">
 ```
+
+## TODO:
+* multithread bruteforce
