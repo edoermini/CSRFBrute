@@ -33,6 +33,28 @@ def connect(username, password, url, csrfname, token, message, request):
 	else:
 		return False
 
+def tryLogin(username, password, url, csrfname, message, request):
+	print("[+] Trying "+username+":"+password+" combination")
+	print("[+] Retrieving CSRF token to submit the login form")
+	token = getToken(url, csrfname, request)
+
+	print("[+] Login token is : {0}".format(token))
+
+	found = connect(username, password, url, csrfname, token, message, request)
+	
+	if (not found):
+		print("[-] Wrong credentials")
+		return False
+	else:
+		print("[+] Logged in sucessfully")
+		return True
+
+def printSuccess(username, password):
+	print("-------------------------------------------------------------")
+	print()
+	print("[*] Credentials:\t"+username+":"+password)
+	print()
+
 if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser()
@@ -66,29 +88,14 @@ if __name__ == '__main__':
 		reqSess = requests.session()
 		
 		if (args.verbosity != None):
-			print("[+] Retrieving CSRF token to submit the login form")
-			token = getToken(args.url, args.csrfname, reqSess)
-			
-			print("[+] Login token is : {0}".format(token))
-
-			found = connect(args.username, args.password, args.url, args.csrfname, token, args.message, reqSess)
-			
-			if (not found):
-				print("[-] Wrong credentials")
-			else:
-				print("[+] Logged in sucessfully")
-			
+			found = tryLogin(args.username, args.password, args.url, args.csrfname, args.message, reqSess)
 			print()
 		else:
 			token = getToken(args.url, args.csrfname, reqSess)
 			found = connect(args.username, args.password, args.url, args.csrfname, token, args.message, reqSess)
 
 		if (found):
-			print("-------------------------------------------------------------")
-			print()
-			print("[*] Credentials:\t"+args.username+":"+args.passwd)
-			print()
-			
+			printSuccess(args.username, args.passwd)
 			sys.exit(1)
 		
 
@@ -99,29 +106,14 @@ if __name__ == '__main__':
 				reqSess = requests.session()
 				
 				if (args.verbosity != None):
-					print("[+] Trying "+args.username+":"+passwd.decode().strip()+" combination")
-					print("[+] Retrieving CSRF token to submit the login form")
-					token = getToken(args.url, args.csrfname, reqSess)
-
-					print("[+] Login token is : {0}".format(token))
-					
-					found = connect(args.username, passwd.decode().strip(), args.url, args.csrfname, token, args.message, reqSess)
-					
-					if (not found):
-						print("[-] Wrong credentials")
-					else:
-						print("[+] Logged in sucessfully")
+					found = tryLogin(args.username, passwd.decode().strip(), args.url, args.csrfname, args.message, reqSess)
 					print()
 				else:
 					token = getToken(args.url, args.csrfname, reqSess)
 					found = connect(args.username, passwd.decode().strip(), args.url, args.csrfname, token, args.message, reqSess)
 
 				if (found):
-					print("-------------------------------------------------------------")
-					print()
-					print("[*] Credentials:\t"+args.username+":"+passwd.decode().strip())
-					print()
-					
+					printSuccess(args.username, passwd.decode().strip())
 					sys.exit(1)
 	
 	# more usernames and one password
@@ -131,29 +123,14 @@ if __name__ == '__main__':
 				reqSess = requests.session()
 				
 				if (args.verbosity != None):
-					print("[+] Trying "+user.decode().strip()+":"+args.password+" combination")
-					print("[+] Retrieving CSRF token to submit the login form")
-					token = getToken(args.url, args.csrfname, reqSess)
-										
-					print("[+] Login token is : {0}".format(token))
-					
-					found = connect(user.decode().strip(), args.password, args.url, args.csrfname, token, args.message, reqSess)
-					
-					if (not found):
-						print("[-] Wrong credentials")
-					else:
-						print("[+] Logged in sucessfully")
+					found = tryLogin(user.decode().strip(), args.password, args.url, args.csrfname, args.message, reqSess)
 					print()
 				else:
 					token = getToken(args.url, args.csrfname, reqSess)
 					found = connect(user.decode().strip(), args.password, args.url, args.csrfname, token, args.message, reqSess)
 
 				if (found):
-					print("-------------------------------------------------------------")
-					print()
-					print("[*] Credentials:\t"+user.decode().strip()+":"+args.passwd)
-					print()
-					
+					printSuccess(user.decode().strip(), args.passwd)
 					sys.exit(1)
 
 	
@@ -166,27 +143,12 @@ if __name__ == '__main__':
 						reqSess = requests.session()
 						
 						if (args.verbosity != None):
-							print("[+] Trying "+user.decode().strip()+":"+passwd.decode().strip()+" combination")
-							print("[+] Retrieving CSRF token to submit the login form")
-							token = getToken(args.url, args.csrfname, reqSess)
-
-							print("[+] Login token is : {0}".format(token))
-							
-							found = connect(user.decode().strip(), passwd.decode().strip(), args.url, args.csrfname, token, args.message, reqSess)
-
-							if (not found):
-								print("[-] Wrong credentials")
-							else:
-								print("[+] Logged in sucessfully")
+							found = tryLogin(user.decode().strip(), passwd.decode().strip(), args.url, args.csrfname, args.message, reqSess)
 							print()
 						else:
 							token = getToken(args.url, args.csrfname, reqSess)
 							found = connect(user.decode().strip(), passwd.decode().strip(), args.url, args.csrfname, token, args.message, reqSess)
 
 						if (found):
-							print("-------------------------------------------------------------")
-							print()
-							print("[*] Credentials:\t"+user.decode().strip()+":"+passwd.decode().strip())
-							print()
-							
+							printSuccess(user.decode().strip(), passwd.decode().strip())
 							sys.exit(1)
