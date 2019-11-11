@@ -72,7 +72,7 @@ if __name__ == '__main__':
 	parser.add_argument('-u', '--url', help='Url with login form', required=True)
 
 	# csrf
-	parser.add_argument('-c', '--csrfname', help='The csrf token input name on the login')
+	parser.add_argument('-c', '--csrfname', help='The csrf token input name on the login', required=True)
 
 	# error message
 	parser.add_argument('-m', '--message', help="The message of invalid cretials in the page after submit", required=True)
