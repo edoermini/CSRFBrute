@@ -56,7 +56,6 @@ def printSuccess(username, password):
 	print()
 
 if __name__ == '__main__':
-
 	parser = argparse.ArgumentParser()
 	
 	# usernames can be one or more in a wordlist, but this two ptions are mutual exclusive	
@@ -82,6 +81,16 @@ if __name__ == '__main__':
 	parser.add_argument('-v', '--verbosity', action='count', help='verbosity level')
 
 	args = parser.parse_args()
+
+	print(
+	'''
+	##########################################
+	|	* CSRFBrute.py                   |
+	|	* By MrRadix                     |
+	|	* https://github.com/MrRadix     |
+	##########################################
+	'''
+	)
 
 	# one username and one password
 	if (args.usernames == None and args.passwords == None):
