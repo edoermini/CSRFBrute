@@ -22,7 +22,7 @@ def connect(username, password, url, csrfname, token, message, request):
 		"useralias": username,
 		"password": password,
 		"submitLogin": "Connect",
-		"{}".format(csrfname): token
+		csrfname: token
 	}
 	
 	login_request = request.post(url, login_info)
