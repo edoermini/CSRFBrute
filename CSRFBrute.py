@@ -70,7 +70,7 @@ if __name__ == '__main__':
 	pass_group.add_argument('-P', '--passwords', help='passwords wordlist for bruteforce login')
 
 	# url
-	parser.add_argument('-u', '--url', help='Url with login', required=True)
+	parser.add_argument('-u', '--url', help='Url with login form', required=True)
 
 	# csrf
 	parser.add_argument('-c', '--csrfname', help='The csrf token input name on the login')
