@@ -85,9 +85,9 @@ if __name__ == '__main__':
 	print(
 	'''
 	##########################################
-	|	* CSRFBrute.py                   |
-	|	* By MrRadix                     |
-	|	* https://github.com/MrRadix     |
+	|	* CSRFBrute.py                   	 |
+	|	* By Edoardo Ermini                  |
+	|	* https://github.com/edoermini     	 |
 	##########################################
 	'''
 	)
